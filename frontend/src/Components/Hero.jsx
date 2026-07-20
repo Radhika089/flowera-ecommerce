@@ -31,7 +31,7 @@ const Hero = () => {
                   Fresh Flowers
                 </p>
 
-                <h1 className="font-playfair text-6xl font-bold text-gray-900 leading-tight ">
+                <h1 className="font-playfair text-4xl md:text-6xl font-bold text-gray-900 leading-tight ">
                   Every Flower
                   <br />
                   Tells a <span className="text-[#e85877]">Story</span>
@@ -70,7 +70,7 @@ const Hero = () => {
                   Luxury Gifts
                 </p>
 
-                <h1 className="font-playfair text-6xl font-bold text-gray-900 leading-tight">
+                <h1 className="font-playfair text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
                   Celebrate
                   <br />
                   Every <span className="text-[#e85877]">Occasion</span>
@@ -110,7 +110,7 @@ const Hero = () => {
                   Artisan Cakes
                 </p>
 
-                <h1 className="font-playfair text-6xl font-bold text-gray-900 leading-tight">
+                <h1 className="font-playfair text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
                   A Slice Of
                   <br />
                   <span className="text-[#e85877]">Happiness</span>

@@ -7,6 +7,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
@@ -20,19 +21,33 @@ const Navbar = () => {
 
         <div className="mx-auto hidden lg:block">
           <ul className="flex justify-center gap-12 py-4 font-medium transition">
-            <li className="nav-link ">Home</li>
+            <Link to="/" className="nav-link ">
+              Home
+            </Link>
 
-            <li className="nav-link">Flowers</li>
+            <Link to="/flowers" className="nav-link">
+              Flowers
+            </Link>
 
-            <li className="nav-link">Cakes</li>
+            <Link to="/cakes" className="nav-link">
+              Cakes
+            </Link>
 
-            <li className="nav-link">Plants</li>
+            <Link to="/plants" className="nav-link">
+              Plants
+            </Link>
 
-            <li className="nav-link">Combos</li>
+            <Link to="/combos" className="nav-link">
+              Combos
+            </Link>
 
-            <li className="nav-link">Gifts</li>
+            <Link to="/gifts" className="nav-link">
+              Gifts
+            </Link>
 
-            <li className="nav-link">Contact</li>
+            <Link to="/contact" className="nav-link">
+              Contact
+            </Link>
           </ul>
         </div>
 
@@ -68,13 +83,15 @@ const Navbar = () => {
       {menu && (
         <div className="lg:hidden bg-white shadow-md">
           <ul className="flex flex-col gap-5 p-6">
-            <li className="nav-link">Home</li>
-            <li>Flowers</li>
-            <li>Cakes</li>
-            <li>Plants</li>
-            <li>Combos</li>
-            <li>Gifts</li>
-            <li>Contact</li>
+            <Link to="/" className="nav-link">
+              Home
+            </Link>
+            <Link to="/flowers">Flowers</Link>
+            <Link to="/cakes">Cakes</Link>
+            <Link to="/plants">Plants</Link>
+            <Link to="/combos">Combos</Link>
+            <Link to="/gifts">Gifts</Link>
+            <Link to="/contact">Contact</Link>
           </ul>
         </div>
       )}

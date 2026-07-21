@@ -1,5 +1,3 @@
-import AnnouncementBar from "../Components/AnnouncementBar";
-import Navbar from "../Components/Navbar";
 import Hero from "../Components/Hero";
 import CategorySection from "../Components/CategorySection";
 import PromoSection from "../Components/PromoSection";
@@ -10,13 +8,10 @@ import USB_Box from "../Components/USB_Box";
 import BestSellingCakes from "../Components/BestSellingCakes";
 import Testimonials from "../Components/Testimonials";
 import FinalBanner from "../Components/FinalBanner";
-import Footer from "../Components/Footer";
 
 const Home = () => {
   return (
     <>
-      <AnnouncementBar />
-      <Navbar />
       <Hero />
       <CategorySection />
       <PromoSection />
@@ -27,7 +22,6 @@ const Home = () => {
       <BestSellingCakes />
       <Testimonials />
       <FinalBanner />
-      <Footer />
     </>
   );
 };

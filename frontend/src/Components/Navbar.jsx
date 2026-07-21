@@ -61,10 +61,17 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-5">
-          <Heart className="cursor-pointer hover:text-pink-600 transition" />
+          <Link to={"/wishlist"}>
+            <Heart className="cursor-pointer hover:text-pink-600 transition" />
+          </Link>
 
-          <ShoppingCart className="cursor-pointer hover:text-pink-600 transition" />
-          <UserRoundKey className="cursor-pointer hover:text-pink-600 transition" />
+          <Link to="/cart">
+            <ShoppingCart className="cursor-pointer hover:text-pink-600 transition" />
+          </Link>
+
+          <Link to="/auth">
+            <UserRoundKey className="cursor-pointer hover:text-pink-600 transition" />
+          </Link>
 
           {menu ? (
             <X

@@ -4,6 +4,7 @@ import { Autoplay } from "swiper/modules";
 import { ShoppingCart, Star } from "lucide-react";
 
 import "swiper/css";
+import ProductCard from "./ProductCard";
 
 const BestSellingCombos = () => {
   const combos = [
@@ -81,42 +82,7 @@ const BestSellingCombos = () => {
           }}>
           {combos.map((item) => (
             <SwiperSlide key={item.id}>
-              <div className="bg-white rounded-2xl overflow-hidden shadow-md group">
-                <div className="h-64 overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className=" w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                  />
-                </div>
-
-                <div className="p-4">
-                  <h3 className=" font-semibold text-gray-800 text-lg">
-                    {item.name}
-                  </h3>
-
-                  <p className="text-sm text-gray-500 mt-1">
-                    {item.description}
-                  </p>
-
-                  <div className="flex items-center gap-1 mt-3 text-yellow-400">
-                    <Star size={16} fill="currentColor" />
-                    <span className=" text-gray-600 text-sm">
-                      {item.rating}
-                    </span>
-                  </div>
-
-                  <div className="flex justify-between items-center mt-4">
-                    <span className="font-bold text-[#e85877] text-lg">
-                      {item.price}
-                    </span>
-                  </div>
-
-                  <button className="hover:bg-[#e85877] hover:text-white text-pink-600 px-3 py-1 rounded-md w-full border mt-2 text-sm flex items-center justify-center py-2 gap-4">
-                    <ShoppingCart size={18} /> Add to cart
-                  </button>
-                </div>
-              </div>
+              <ProductCard product={item} />
             </SwiperSlide>
           ))}
         </Swiper>

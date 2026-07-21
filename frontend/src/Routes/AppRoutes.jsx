@@ -9,24 +9,39 @@ import Cart from "../Pages/Cart";
 import ProductDetails from "../Pages/ProductDetails";
 import About from "../Pages/About";
 import Contact from "../Pages/Contact";
+import Plants from "../Pages/Plants";
+import AnnouncementBar from "../Components/AnnouncementBar";
+import Navbar from "../Components/Navbar";
+import Footer from "../Components/Footer";
+import Wishlist from "../Pages/Wishlist";
+import Login from "../Pages/Login";
+import Auth from "../Pages/Auth";
 
 const AppRoutes = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
+    <>
+      <AnnouncementBar />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
 
-      <Route path="/flowers" element={<Flowers />} />
-      <Route path="/cakes" element={<Cakes />} />
-      <Route path="/gifts" element={<Gifts />} />
-      <Route path="/combos" element={<Combos />} />
+        <Route path="/flowers" element={<Flowers />} />
+        <Route path="/cakes" element={<Cakes />} />
+        <Route path="/gifts" element={<Gifts />} />
+        <Route path="/combos" element={<Combos />} />
+        <Route path="/plants" element={<Plants />} />
 
-      <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
 
-      <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/flowers/:slug" element={<ProductDetails />} />
 
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
-    </Routes>
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/auth" element={<Auth />} />
+      </Routes>
+      <Footer />
+    </>
   );
 };
 

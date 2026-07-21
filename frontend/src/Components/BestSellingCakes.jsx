@@ -4,6 +4,7 @@ import { Autoplay } from "swiper/modules";
 import { ShoppingCart, Star } from "lucide-react";
 
 import "swiper/css";
+import ProductCard from "./ProductCard";
 
 const BestSellingCakes = () => {
   const cakes = [
@@ -94,66 +95,7 @@ const BestSellingCakes = () => {
           }}>
           {cakes.map((cake) => (
             <SwiperSlide key={cake.id}>
-              <div className="bg-white rounded-2xl overflow-hidden shadow-md group">
-                <div className="h-64 overflow-hidden">
-                  <img
-                    src={cake.image}
-                    alt={cake.name}
-                    className="
-                      w-full
-                      h-full
-                      object-cover
-                      group-hover:scale-110
-                      transition
-                      duration-500
-                      "
-                  />
-                </div>
-
-                <div className="p-4">
-                  <h3 className="font-semibold text-gray-800">{cake.name}</h3>
-
-                  <div className="flex items-center gap-1 mt-2">
-                    <div className="flex text-yellow-400">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star key={star} size={15} fill="currentColor" />
-                      ))}
-                    </div>
-
-                    <span className="text-sm text-gray-500">
-                      {cake.rating} ({cake.reviews})
-                    </span>
-                  </div>
-
-                  <div className="flex justify-between items-center mt-3">
-                    <span className="font-bold text-[#e85877]">
-                      {cake.price}
-                    </span>
-                  </div>
-
-                  <button
-                    className="
-                      hover:bg-[#e85877]
-                      hover:text-white
-                      text-pink-600
-                      px-3
-                      py-2
-                      rounded-md
-                      w-full
-                      border
-                      mt-3
-                      text-sm
-                      flex
-                      items-center
-                      justify-center
-                      gap-3
-                      transition
-                      ">
-                    <ShoppingCart size={18} />
-                    Add to cart
-                  </button>
-                </div>
-              </div>
+              <ProductCard product={cake} />
             </SwiperSlide>
           ))}
         </Swiper>

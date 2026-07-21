@@ -5,6 +5,7 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { ShoppingCart, Star } from "lucide-react";
+import ProductCard from "./ProductCard";
 
 const FeaturedCollection = () => {
   const products = [
@@ -96,43 +97,7 @@ const FeaturedCollection = () => {
           }}>
           {products.map((product) => (
             <SwiperSlide key={product.id}>
-              <div className="bg-white rounded-2xl overflow-hidden shadow-md group">
-                <div className="h-64 overflow-hidden">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
-                  />
-                </div>
-
-                <div className="p-4">
-                  <h3 className="font-semibold text-gray-800">
-                    {product.name}
-                  </h3>
-
-                  <div className="flex items-center gap-1 mt-2">
-                    <div className="flex text-yellow-400">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star key={star} size={15} fill="currentColor" />
-                      ))}
-                    </div>
-
-                    <span className="text-sm text-gray-500">
-                      {product.rating} ({product.reviews})
-                    </span>
-                  </div>
-
-                  <div className="flex justify-between items-center mt-3">
-                    <span className="font-bold text-[#e85877]">
-                      {product.price}
-                    </span>
-                  </div>
-
-                  <button className="hover:bg-[#e85877] hover:text-white text-pink-600 px-3 py-1 rounded-md w-full border mt-2 text-sm flex items-center justify-center py-2 gap-4">
-                    <ShoppingCart className="h-5 w-5" /> Add to cart
-                  </button>
-                </div>
-              </div>
+              <ProductCard product={product} />
             </SwiperSlide>
           ))}
         </Swiper>

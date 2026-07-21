@@ -1,0 +1,58 @@
+const gifts = [
+  {
+    id: 1,
+    name: "Cute Teddy Bear",
+    category: "Soft Toys",
+    price: 699,
+    rating: 4.8,
+    reviews: 104,
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600",
+  },
+  {
+    id: 2,
+    name: "Chocolate Hamper",
+    category: "Chocolate",
+    price: 999,
+    rating: 4.9,
+    reviews: 76,
+    image: "https://images.unsplash.com/photo-1511381939415-e44015466834?w=600",
+  },
+  {
+    id: 3,
+    name: "Personalized Mug",
+    category: "Personalized",
+    price: 499,
+    rating: 4.6,
+    reviews: 51,
+    image: "https://images.unsplash.com/photo-1514228742587-6b1558fcf93a?w=600",
+  },
+  {
+    id: 4,
+    name: "Luxury Gift Box",
+    category: "Hampers",
+    price: 1799,
+    rating: 5,
+    reviews: 89,
+    image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=600",
+  },
+  {
+    id: 5,
+    name: "Greeting Card Set",
+    category: "Personalized",
+    price: 299,
+    rating: 4.5,
+    reviews: 41,
+    image: "https://images.unsplash.com/photo-1516542076529-1ea3854896f2?w=600",
+  },
+  {
+    id: 6,
+    name: "Premium Teddy Combo",
+    category: "Soft Toys",
+    price: 1299,
+    rating: 4.8,
+    reviews: 93,
+    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600",
+  },
+];
+
+export default gifts;

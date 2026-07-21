@@ -1,0 +1,58 @@
+const cakes = [
+  {
+    id: 1,
+    name: "Chocolate Truffle Cake",
+    category: "Chocolate",
+    price: 899,
+    rating: 4.9,
+    reviews: 145,
+    image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600",
+  },
+  {
+    id: 2,
+    name: "Red Velvet Cake",
+    category: "Red Velvet",
+    price: 1099,
+    rating: 4.8,
+    reviews: 112,
+    image: "https://images.unsplash.com/photo-1464306076886-da185f6a9d05?w=600",
+  },
+  {
+    id: 3,
+    name: "Black Forest Cake",
+    category: "Chocolate",
+    price: 999,
+    rating: 4.7,
+    reviews: 87,
+    image: "https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=600",
+  },
+  {
+    id: 4,
+    name: "Fruit Cake",
+    category: "Fruit",
+    price: 1199,
+    rating: 4.8,
+    reviews: 91,
+    image: "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=600",
+  },
+  {
+    id: 5,
+    name: "Vanilla Delight",
+    category: "Vanilla",
+    price: 799,
+    rating: 4.6,
+    reviews: 78,
+    image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600",
+  },
+  {
+    id: 6,
+    name: "Premium Designer Cake",
+    category: "Premium",
+    price: 1999,
+    rating: 5,
+    reviews: 45,
+    image: "https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?w=600",
+  },
+];
+
+export default cakes;

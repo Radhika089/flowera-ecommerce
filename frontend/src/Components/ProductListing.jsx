@@ -38,15 +38,11 @@ const ProductListing = ({
   return (
     <section className="bg-[#fffaf8] min-h-screen py-10">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Breadcrumb */}
-
         <div className="text-sm text-gray-500 mb-6">
           Home
           <span className="mx-2">/</span>
           <span className="text-[#e85877] font-medium">{title}</span>
         </div>
-
-        {/* Hero */}
 
         <div className="bg-gradient-to-r from-[#fde8ed] to-[#fff8f6] rounded-3xl overflow-hidden mb-12">
           <div className="grid lg:grid-cols-2 items-center">
@@ -89,8 +85,6 @@ const ProductListing = ({
             </div>
           </div>
         </div>
-
-        {/* Search + Sort */}
 
         <div className="flex flex-col md:flex-row gap-4 justify-between items-center mb-8">
           <div className="relative w-full md:max-w-lg">
@@ -136,7 +130,7 @@ const ProductListing = ({
           ))}
         </div>
 
-        {/* Product Count */}
+        {/* Count */}
 
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-lg font-semibold text-gray-700">

@@ -40,23 +40,11 @@ const Testimonials = () => {
   return (
     <section className="py-16 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
-        <h2
-          className="
-        text-center
-        text-4xl
-        font-bold
-        font-playfair
-        ">
+        <h2 className="text-center text-4xl font-bold font-playfair">
           What Our Customers Say
         </h2>
 
-        <p
-          className="
-        text-center
-        text-gray-500
-        mt-3
-        mb-10
-        ">
+        <p className="text-center text-gray-500 mt-3 mb-10">
           Loved by thousands of happy customers
         </p>
 
@@ -82,50 +70,21 @@ const Testimonials = () => {
           }}>
           {reviews.map((item) => (
             <SwiperSlide key={item.id}>
-              <div
-                className="
-              bg-[#fffaf8]
-              rounded-3xl
-              p-8
-              shadow-md
-              text-center
-              ">
-                <div
-                  className="
-                flex
-                justify-center
-                text-yellow-400
-                mb-5
-                ">
+              <div className="bg-[#fffaf8] rounded-3xl p-8 shadow-md text-center">
+                <div className="flex justify-center text-yellow-400 mb-5">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <Star key={star} size={18} fill="currentColor" />
                   ))}
                 </div>
 
-                <p
-                  className="
-                text-gray-600
-                leading-relaxed
-                ">
+                <p className=" text-gray-600 leading-relaxed">
                   "{item.review}"
                 </p>
 
                 <div className="mt-6">
-                  <h3
-                    className="
-                  font-semibold
-                  text-gray-800
-                  ">
-                    {item.name}
-                  </h3>
+                  <h3 className="font-semibold text-gray-800">{item.name}</h3>
 
-                  <span
-                    className="
-                  text-sm
-                  text-gray-500
-                  ">
-                    {item.city}
-                  </span>
+                  <span className="text-sm text-gray-500">{item.city}</span>
                 </div>
               </div>
             </SwiperSlide>

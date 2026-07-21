@@ -26,7 +26,7 @@ const Auth = () => {
           </p>
         </div>
 
-        {/* Right Side */}
+        {/* Right */}
         <div className="p-8 md:p-12">
           {/* Tabs */}
           <div className="flex justify-around border-b mb-10">

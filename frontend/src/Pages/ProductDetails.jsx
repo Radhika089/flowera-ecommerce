@@ -10,36 +10,53 @@ import {
 } from "lucide-react";
 import ProductCard from "../Components/ProductCard";
 import flowers from "../data/flowers";
-
-const images = [
-  "https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=800",
-  "https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=800",
-  "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=800",
-  "https://images.unsplash.com/photo-1526397751294-331021109fbd?w=800",
-];
+import cakes from "../data/cakes";
+import gifts from "../data/gifts";
+import plants from "../data/plants";
+import combos from "../data/combos";
+import { useParams } from "react-router-dom";
 
 const ProductDetails = () => {
-  const [selectedImage, setSelectedImage] = useState(images[0]);
   const [quantity, setQuantity] = useState(1);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const { slug } = useParams();
+  const allProducts = [
+    ...flowers.map((item) => ({ ...item, type: "flowers" })),
+    ...cakes.map((item) => ({ ...item, type: "cakes" })),
+    ...gifts.map((item) => ({ ...item, type: "gifts" })),
+    ...plants.map((item) => ({ ...item, type: "plants" })),
+    ...combos.map((item) => ({ ...item, type: "combos" })),
+  ];
+
+  const product = allProducts.find((item) => item.slug === slug);
+
+  if (!product) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <h1 className="text-3xl font-bold">Product Not Found 😢</h1>
+      </div>
+    );
+  }
+
+  const relatedProducts = allProducts
+    .filter((item) => item.type === product.type && item.slug !== product.slug)
+    .slice(0, 4);
 
   return (
     <section className="bg-[#fffaf8] py-12">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Breadcrumb */}
-
         <p className="text-sm text-gray-500 mb-8">
-          Home / Flowers /
-          <span className="text-[#e85877]"> Red Rose Bouquet</span>
+          Home / <span className="capitalize">{product.type}</span>/
+          <span className="text-pink-500">{product.name}</span>
         </p>
 
         <div className="grid lg:grid-cols-2 gap-16">
           {/* LEFT */}
 
           <div className="flex gap-5">
-            {/* Thumbnails */}
-
             <div className="flex flex-col gap-4">
-              {images.map((img, index) => (
+              {product.images.map((img, index) => (
                 <img
                   key={index}
                   src={img}
@@ -55,12 +72,10 @@ const ProductDetails = () => {
               ))}
             </div>
 
-            {/* Main Image */}
-
             <div className="flex-1 bg-white rounded-3xl overflow-hidden shadow-md">
               <img
                 src={selectedImage}
-                alt=""
+                alt={product.name}
                 className="w-full h-[600px] object-cover hover:scale-110 transition duration-500"
               />
             </div>
@@ -70,11 +85,11 @@ const ProductDetails = () => {
 
           <div>
             <span className="bg-pink-100 text-pink-600 px-4 py-2 rounded-full text-sm">
-              Bestseller
+              {product.badge}
             </span>
 
             <h1 className="text-5xl font-playfair font-bold mt-5">
-              Red Rose Bouquet
+              {product.name}
             </h1>
 
             <div className="flex items-center gap-2 mt-4">
@@ -84,27 +99,26 @@ const ProductDetails = () => {
                 ))}
               </div>
 
-              <span className="text-gray-500">4.8 (124 Reviews)</span>
+              <span className="text-gray-500">
+                {product.rating} ({product.reviews} Reviews)
+              </span>
             </div>
 
             <div className="mt-6 flex items-center gap-5">
-              <h2 className="text-4xl font-bold text-[#e85877]">₹799</h2>
+              <h2 className="text-4xl font-bold text-[#e85877]">
+                ₹{product.price}
+              </h2>
 
-              <del className="text-gray-400 text-xl">₹999</del>
+              <del className="text-gray-400 text-xl">₹{product.oldPrice}</del>
 
               <span className="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm">
-                Save ₹200
+                Save ₹{product.oldPrice - product.price}
               </span>
             </div>
 
             <p className="mt-8 text-gray-600 leading-8">
-              Surprise your loved ones with this handcrafted bouquet of premium
-              red roses wrapped beautifully with elegant paper and ribbon.
-              Perfect for birthdays, anniversaries, Valentine's Day and every
-              special moment.
+              {product.description}
             </p>
-
-            {/* Quantity */}
 
             <div className="mt-10">
               <p className="font-semibold mb-4">Quantity</p>
@@ -126,8 +140,6 @@ const ProductDetails = () => {
               </div>
             </div>
 
-            {/* Buttons */}
-
             <div className="flex gap-4 mt-10">
               <button className="flex-1 bg-[#e85877] hover:bg-pink-700 text-white py-4 rounded-xl flex items-center justify-center gap-3">
                 <ShoppingCart />
@@ -138,8 +150,6 @@ const ProductDetails = () => {
                 Buy Now
               </button>
             </div>
-
-            {/* Features */}
 
             <div className="bg-white rounded-2xl shadow-md mt-10 p-6 space-y-5">
               <div className="flex gap-4">
@@ -184,8 +194,8 @@ const ProductDetails = () => {
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {flowers.slice(0, 4).map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {relatedProducts.map((item) => (
+              <ProductCard key={item.id} product={item} type={item.type} />
             ))}
           </div>
         </div>

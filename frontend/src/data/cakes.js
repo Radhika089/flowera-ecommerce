@@ -2,6 +2,7 @@ const cakes = [
   {
     id: 1,
     name: "Chocolate Truffle Cake",
+    slug: "chocolate-truffle-cake",
     category: "Chocolate",
     price: 899,
     rating: 4.9,
@@ -11,6 +12,7 @@ const cakes = [
   {
     id: 2,
     name: "Red Velvet Cake",
+    slug: "red-velvet-cake",
     category: "Red Velvet",
     price: 1099,
     rating: 4.8,
@@ -20,6 +22,7 @@ const cakes = [
   {
     id: 3,
     name: "Black Forest Cake",
+    slug: "black-forest-cake",
     category: "Chocolate",
     price: 999,
     rating: 4.7,
@@ -29,6 +32,7 @@ const cakes = [
   {
     id: 4,
     name: "Fruit Cake",
+    slug: "fruit-cake",
     category: "Fruit",
     price: 1199,
     rating: 4.8,
@@ -38,6 +42,7 @@ const cakes = [
   {
     id: 5,
     name: "Vanilla Delight",
+    slug: "vanilla-delight-cake",
     category: "Vanilla",
     price: 799,
     rating: 4.6,
@@ -47,6 +52,7 @@ const cakes = [
   {
     id: 6,
     name: "Premium Designer Cake",
+    slug: "premium-designer-cake",
     category: "Premium",
     price: 1999,
     rating: 5,

@@ -4,16 +4,16 @@ import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import { ShoppingCart, Star } from "lucide-react";
 import ProductCard from "./ProductCard";
-import flowers from "../data/flowers";
+import gifts from "../data/gifts";
+import plants from "../data/plants";
 
-const FeaturedCollection = () => {
+const PlantsCollection = () => {
   return (
     <section className="py-16 px-6 bg-[#fffaf8]">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-center text-4xl font-bold font-playfair">
-          Featured Collection
+          Plants Collection
         </h2>
 
         <p className="text-center text-gray-500 mt-3 mb-10">
@@ -39,9 +39,9 @@ const FeaturedCollection = () => {
               slidesPerView: 5,
             },
           }}>
-          {flowers.slice(0, 6).map((product) => (
+          {plants.slice(0, 6).map((product) => (
             <SwiperSlide key={product.id}>
-              <ProductCard product={product} type="flowers" />
+              <ProductCard product={product} type="plants" />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -50,4 +50,4 @@ const FeaturedCollection = () => {
   );
 };
 
-export default FeaturedCollection;
+export default PlantsCollection;

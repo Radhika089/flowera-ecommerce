@@ -8,6 +8,8 @@ import USB_Box from "../Components/USB_Box";
 import BestSellingCakes from "../Components/BestSellingCakes";
 import Testimonials from "../Components/Testimonials";
 import FinalBanner from "../Components/FinalBanner";
+import GiftsCollection from "../Components/GiftsCollection";
+import PlantsCollection from "../Components/PlantsCollection";
 
 const Home = () => {
   return (
@@ -18,8 +20,10 @@ const Home = () => {
       <FeaturedCollection />
       <OfferBox />
       <BestSellingCombos />
+      <PlantsCollection />
       <USB_Box />
       <BestSellingCakes />
+      <GiftsCollection />
       <Testimonials />
       <FinalBanner />
     </>

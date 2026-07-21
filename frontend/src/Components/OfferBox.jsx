@@ -6,7 +6,7 @@ const OfferBox = () => {
     <section className="py-16 px-6 bg-[#fffaf8]">
       <div className="max-w-7xl mx-auto">
         <div className="relative overflow-hidden rounded-[40px] bg-[#fdecef] min-h-[360px] flex items-center">
-          {/* Big Pink Circle */}
+          {/* Pink Circle */}
 
           <div className="absolute -left-24 -bottom-28 w-[420px] h-[420px] rounded-full bg-[#f8b7c4]" />
 
@@ -15,7 +15,7 @@ const OfferBox = () => {
           <div className="absolute left-40 top-10 w-10 h-10 rounded-full bg-[#f9cdd6]" />
 
           <div className="relative z-10 w-full flex flex-col md:flex-row items-center justify-between px-10 md:px-20 gap-10">
-            {/* Left Content */}
+            {/* Left  */}
 
             <div className="text-center md:text-left">
               <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full text-[#e85877] font-semibold">
@@ -39,7 +39,7 @@ const OfferBox = () => {
               </button>
             </div>
 
-            {/* Discount Circle */}
+            {/* Circle */}
 
             <div className="relative z-10 w-48 h-48 rounded-full bg-white shadow-xl flex flex-col items-center justify-center">
               <span className="text-6xl font-bold text-[#e85877]">30%</span>

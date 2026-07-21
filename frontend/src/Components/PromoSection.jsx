@@ -9,11 +9,9 @@ const PromoSection = () => {
   return (
     <section className="py-12 px-6 bg-[#fffaf8]">
       <div className="max-w-7xl mx-auto">
-        {/* Top Promo Banners */}
+        {/* Banners */}
         <div className="grid grid-cols-2 gap-3 md:gap-5">
-          <Link
-            to="/midnight-surprise"
-            className="block overflow-hidden rounded-2xl">
+          <Link to="/flowers" className="block overflow-hidden rounded-2xl">
             <img
               src={promo3}
               alt="Midnight Surprise"
@@ -21,9 +19,7 @@ const PromoSection = () => {
             />
           </Link>
 
-          <Link
-            to="/express-delivery"
-            className="block overflow-hidden rounded-2xl">
+          <Link to="/cakes" className="block overflow-hidden rounded-2xl">
             <img
               src={promo2}
               alt="Express Delivery"
@@ -32,9 +28,7 @@ const PromoSection = () => {
           </Link>
         </div>
 
-        {/* Why Choose Us Banner */}
-
-        <Link to="/about" className="block mt-6 overflow-hidden rounded-2xl">
+        <Link to="/gifts" className="block mt-6 overflow-hidden rounded-2xl">
           <img
             src={promo1}
             alt="Why Choose Us"

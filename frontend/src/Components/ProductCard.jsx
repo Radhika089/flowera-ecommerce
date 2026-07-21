@@ -2,10 +2,10 @@ import React from "react";
 import { ShoppingCart, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, type }) => {
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group">
-      <Link to={`/flowers/${product.slug}`}>
+      <Link to={`/${type}/${product.slug}`}>
         <div className="h-64 overflow-hidden">
           <img
             src={product.image}
@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
       </Link>
 
       <div className="p-4">
-        <Link to={`/product/${product.id}`}>
+        <Link to={`/${type}/${product.slug}`}>
           <h3 className="font-semibold text-gray-800 line-clamp-2 hover:text-[#e85877] transition">
             {product.name}
           </h3>

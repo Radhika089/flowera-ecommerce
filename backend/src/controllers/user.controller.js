@@ -32,7 +32,11 @@ export async function registerUser(req, res) {
     });
 
     const token = await createToken(user._id);
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
 
     return res.status(201).json({
       success: true,
@@ -76,7 +80,11 @@ export async function loginUser(req, res) {
     }
 
     const token = await createToken(user._id);
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
 
     return res.status(201).json({
       success: true,

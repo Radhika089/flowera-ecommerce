@@ -3,6 +3,7 @@ import {
   createProduct,
   deleteProduct,
   getAllProducts,
+  getProductById,
   getProductBySlug,
   updateProduct,
 } from "../controllers/product.controller.js";
@@ -14,6 +15,13 @@ import {
 const productRouter = express.Router();
 
 productRouter.get("/", getAllProducts);
+productRouter.get(
+  "/admin/:id",
+  authMiddleware,
+  adminMiddleware,
+  getProductById,
+);
+
 productRouter.get("/:type/:slug", getProductBySlug);
 
 // admin route

@@ -1,39 +1,117 @@
-import { Link, Outlet } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Package,
+  PlusSquare,
+  Users,
+  LogOut,
+  Flower2,
+} from "lucide-react";
+
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+
+import { logout } from "../api/user.api";
 
 const AdminLayout = () => {
+  const navigate = useNavigate();
+
+  async function handleLogout() {
+    try {
+      await logout();
+      navigate("/");
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const navItem =
+    "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200";
+
   return (
-    <div className="min-h-screen bg-gray-100">
-      <aside className="fixed left-0 top-0 h-screen w-64 bg-white shadow-lg p-6">
-        <h1 className="text-2xl font-playfair font-bold text-pink-600">
-          🌸 BloomBasket
-        </h1>
+    <div className="min-h-screen bg-[#fafafa] flex">
+      <aside className="w-72 bg-white border-r border-gray-200 flex flex-col">
+        <div className="p-8 border-b">
+          <div className="flex items-center gap-3">
+            <div className="bg-pink-100 p-3 rounded-2xl">
+              <Flower2 className="text-pink-600" size={26} />
+            </div>
 
-        <p className="text-sm text-gray-500 mt-1">Admin Dashboard</p>
+            <div>
+              <h1 className="text-2xl font-playfair font-bold text-gray-800">
+                BloomBasket
+              </h1>
 
-        <nav className="mt-10 space-y-4">
-          <Link to="/admin" className="block hover:text-pink-600">
+              <p className="text-sm text-gray-500">Admin Dashboard</p>
+            </div>
+          </div>
+        </div>
+
+        <nav className="flex-1 p-5 space-y-2">
+          <NavLink
+            to="/admin"
+            end
+            className={({ isActive }) =>
+              `${navItem} ${
+                isActive
+                  ? "bg-pink-600 text-white shadow-lg"
+                  : "text-gray-600 hover:bg-pink-50 hover:text-pink-600"
+              }`
+            }>
+            <LayoutDashboard size={20} />
             Dashboard
-          </Link>
+          </NavLink>
 
-          <Link to="/admin/products" className="block hover:text-pink-600">
+          <NavLink
+            to="/admin/products"
+            className={({ isActive }) =>
+              `${navItem} ${
+                isActive
+                  ? "bg-pink-600 text-white shadow-lg"
+                  : "text-gray-600 hover:bg-pink-50 hover:text-pink-600"
+              }`
+            }>
+            <Package size={20} />
             Products
-          </Link>
+          </NavLink>
 
-          <Link to="/admin/products/add" className="block hover:text-pink-600">
+          <NavLink
+            to="/admin/products/add"
+            className={({ isActive }) =>
+              `${navItem} ${
+                isActive
+                  ? "bg-pink-600 text-white shadow-lg"
+                  : "text-gray-600 hover:bg-pink-50 hover:text-pink-600"
+              }`
+            }>
+            <PlusSquare size={20} />
             Add Product
-          </Link>
+          </NavLink>
 
-          <Link to="/admin/orders" className="block hover:text-pink-600">
-            Orders
-          </Link>
-
-          <Link to="/admin/users" className="block hover:text-pink-600">
+          <NavLink
+            to="/admin/users"
+            className={({ isActive }) =>
+              `${navItem} ${
+                isActive
+                  ? "bg-pink-600 text-white shadow-lg"
+                  : "text-gray-600 hover:bg-pink-50 hover:text-pink-600"
+              }`
+            }>
+            <Users size={20} />
             Users
-          </Link>
+          </NavLink>
         </nav>
+
+        <div className="p-5 border-t">
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center justify-center gap-3 py-3 rounded-xl bg-red-50 text-red-600 hover:bg-red-100 transition">
+            <LogOut size={20} />
+            Logout
+          </button>
+        </div>
       </aside>
 
-      <main className="ml-64 p-8">
+      <main className="flex-1 p-8 overflow-y-auto">
         <Outlet />
       </main>
     </div>

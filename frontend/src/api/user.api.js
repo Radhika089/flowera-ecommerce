@@ -15,3 +15,17 @@ export const logout = () => {
 export const getCurrentUser = () => {
   return api.get("/user/me");
 };
+
+export const getUsers = () => {
+  return api.get("/user/admin/users");
+};
+
+export const updateUserRole = (id, role) => {
+  return api.put(`/user/admin/users/${id}`, {
+    role,
+  });
+};
+
+export const deleteUser = (id) => {
+  return api.delete(`/user/admin/users/${id}`);
+};

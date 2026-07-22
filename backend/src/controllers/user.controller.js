@@ -139,3 +139,61 @@ export async function getCurrentUser(req, res) {
     });
   }
 }
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await userModel.find().sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      users,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export const updateUserRole = async (req, res) => {
+  try {
+    const { role } = req.body;
+
+    const user = await userModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        role,
+      },
+      {
+        new: true,
+      },
+    );
+
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  try {
+    await userModel.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+      success: true,
+      message: "User deleted",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

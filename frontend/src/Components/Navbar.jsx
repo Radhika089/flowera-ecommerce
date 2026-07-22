@@ -114,8 +114,24 @@ const Navbar = () => {
                   <div className="absolute right-0 mt-3 w-52 bg-white rounded-2xl shadow-xl border z-50 overflow-hidden">
                     <div className="px-4 py-3 border-b">
                       <p className="font-semibold">{user.name}</p>
+
                       <p className="text-sm text-gray-500">{user.email}</p>
+
+                      {user.role === "admin" && (
+                        <span className="inline-flex items-center gap-1 mt-2 text-xs bg-pink-100 text-pink-600 px-3 py-1 rounded-full">
+                          🛡 Admin Account
+                        </span>
+                      )}
                     </div>
+
+                    {user.role === "admin" && (
+                      <Link
+                        to="/admin"
+                        onClick={() => setProfileMenu(false)}
+                        className="block px-4 py-3 hover:bg-pink-50 text-pink-600 font-medium">
+                        Admin Panel
+                      </Link>
+                    )}
 
                     <button
                       onClick={handleLogout}

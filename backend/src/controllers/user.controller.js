@@ -6,7 +6,7 @@ const createToken = (userId) => {
 };
 
 export async function registerUser(req, res) {
-  const { name, email, password } = req.body;
+  const { name, email, password, role } = req.body;
 
   if (!name || !email || !password) {
     return res.status(400).json({
@@ -28,6 +28,7 @@ export async function registerUser(req, res) {
       name,
       email,
       password,
+      role,
     });
 
     const token = await createToken(user._id);
@@ -40,6 +41,7 @@ export async function registerUser(req, res) {
         _id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
       },
       token,
     });
@@ -83,6 +85,7 @@ export async function loginUser(req, res) {
         _id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
       },
       token,
     });

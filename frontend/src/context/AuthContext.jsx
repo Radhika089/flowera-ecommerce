@@ -32,6 +32,7 @@ export default function AuthProvider({ children }) {
       setUser(data.user);
 
       await fetchCounts();
+      return data.user;
     } catch (error) {
       setUser(null);
       setCartCount(0);

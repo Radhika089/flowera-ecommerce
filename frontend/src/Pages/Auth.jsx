@@ -29,11 +29,15 @@ const Auth = () => {
     try {
       await login(formData);
 
-      await fetchUser();
+      const user = await fetchUser();
 
       toast.success("Login Successful 🎉");
 
-      navigate("/");
+      if (user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       toast.error(error.response?.data?.message || "Login Failed");
     }

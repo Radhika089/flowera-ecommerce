@@ -17,6 +17,8 @@ import Wishlist from "../Pages/Wishlist";
 import Auth from "../Pages/Auth";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AdminDashboard from "../Pages/Admin/AdminDashboard";
+import ProtectedAdmin from "../Components/ProtectedAdmin";
 
 const AppRoutes = () => {
   return (
@@ -40,6 +42,14 @@ const AppRoutes = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/auth" element={<Auth />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedAdmin>
+              <AdminDashboard />
+            </ProtectedAdmin>
+          }
+        />
       </Routes>
       <Footer />
 

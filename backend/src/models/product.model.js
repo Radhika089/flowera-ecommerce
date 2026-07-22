@@ -67,7 +67,7 @@ const productSchema = new mongoose.Schema(
 
     badge: {
       type: String,
-      enum: ["Bestseller", "Trending", "New Arrival", ""],
+      enum: ["Bestseller", "Trending", "New", "Popular", "Premium", "Classic"],
       default: "",
     },
 

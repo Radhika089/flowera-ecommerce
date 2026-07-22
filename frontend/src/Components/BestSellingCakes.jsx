@@ -1,13 +1,38 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import { ShoppingCart, Star } from "lucide-react";
 
 import "swiper/css";
+
 import ProductCard from "./ProductCard";
-import cakes from "../data/cakes";
+import { getProducts } from "../api/product.api";
 
 const BestSellingCakes = () => {
+  const [cakes, setCakes] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchCakes() {
+      try {
+        const { data } = await getProducts({
+          type: "cakes",
+        });
+
+        setCakes(data.products);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchCakes();
+  }, []);
+
+  if (loading) {
+    return null;
+  }
+
   return (
     <section className="py-16 px-6 bg-[#fffaf8]">
       <div className="max-w-7xl mx-auto">
@@ -30,22 +55,19 @@ const BestSellingCakes = () => {
             0: {
               slidesPerView: 1,
             },
-
             640: {
               slidesPerView: 2,
             },
-
             768: {
               slidesPerView: 3,
             },
-
             1024: {
               slidesPerView: 5,
             },
           }}>
           {cakes.map((cake) => (
-            <SwiperSlide key={cake.id}>
-              <ProductCard product={cake} type="cakes" />
+            <SwiperSlide key={cake._id}>
+              <ProductCard product={cake} type={cake.type} />
             </SwiperSlide>
           ))}
         </Swiper>

@@ -1,13 +1,10 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import cors from "cors";
 import app from "./src/app.js";
 import { connectDb } from "./src/config/db.js";
 
 connectDb();
-
-app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("API Running");

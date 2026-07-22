@@ -130,8 +130,10 @@ export async function getAllProducts(req, res) {
 }
 
 export async function getProductBySlug(req, res) {
+  const { type, slug } = req.params;
+
   try {
-    const product = await productModel.findOne({ slug: req.params.slug });
+    const product = await productModel.findOne({ slug, type });
 
     if (!product) {
       return res.status(404).json({

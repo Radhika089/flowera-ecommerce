@@ -6,9 +6,32 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { ShoppingCart, Star } from "lucide-react";
 import ProductCard from "./ProductCard";
-import flowers from "../data/flowers";
+
+import { useEffect, useState } from "react";
+import { getProducts } from "../api/product.api";
 
 const FeaturedCollection = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const { data } = await getProducts({
+          type: "flowers",
+        });
+
+        setProducts(data.products);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProducts();
+  }, []);
+
   return (
     <section className="py-16 px-6 bg-[#fffaf8]">
       <div className="max-w-7xl mx-auto">
@@ -39,9 +62,9 @@ const FeaturedCollection = () => {
               slidesPerView: 5,
             },
           }}>
-          {flowers.slice(0, 6).map((product) => (
-            <SwiperSlide key={product.id}>
-              <ProductCard product={product} type="flowers" />
+          {products.map((product) => (
+            <SwiperSlide key={product._id}>
+              <ProductCard product={product} type={product.type} />
             </SwiperSlide>
           ))}
         </Swiper>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Star,
   Minus,
@@ -9,39 +9,88 @@ import {
   Flower2,
 } from "lucide-react";
 import ProductCard from "../Components/ProductCard";
-import flowers from "../data/flowers";
-import cakes from "../data/cakes";
-import gifts from "../data/gifts";
-import plants from "../data/plants";
-import combos from "../data/combos";
 import { useParams } from "react-router-dom";
+import { addToCart } from "../api/cart.api";
+import { getProduct, getProducts } from "../api/product.api";
+import { isLoggedIn } from "../utlis/auth";
+import { useNavigate } from "react-router-dom";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const { slug } = useParams();
-  const allProducts = [
-    ...flowers.map((item) => ({ ...item, type: "flowers" })),
-    ...cakes.map((item) => ({ ...item, type: "cakes" })),
-    ...gifts.map((item) => ({ ...item, type: "gifts" })),
-    ...plants.map((item) => ({ ...item, type: "plants" })),
-    ...combos.map((item) => ({ ...item, type: "combos" })),
-  ];
+  const { type, slug } = useParams();
 
-  const product = allProducts.find((item) => item.slug === slug);
+  const [product, setProduct] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState([]);
+
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  async function handleAddToCart() {
+    if (!isLoggedIn()) {
+      alert("Please login first to add products to cart");
+      navigate("/auth");
+      return;
+    }
+
+    try {
+      const { data } = await addToCart({
+        productId: product._id,
+        quantity,
+      });
+
+      console.log(data);
+
+      alert("Product added to cart 🛒");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    async function fetchProduct() {
+      try {
+        const { data } = await getProduct(type, slug);
+
+        setProduct(data.product);
+
+        setSelectedImage(data.product.images[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchProduct();
+  }, [type, slug]);
+
+  useEffect(() => {
+    async function fetchRelated() {
+      try {
+        const { data } = await getProducts({
+          type,
+        });
+
+        const related = data.products
+          .filter((item) => item.slug !== slug)
+          .slice(0, 4);
+
+        setRelatedProducts(related);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchRelated();
+  }, [type, slug]);
 
   if (!product) {
     return (
       <div className="min-h-screen flex justify-center items-center">
-        <h1 className="text-3xl font-bold">Product Not Found 😢</h1>
+        Loading...
       </div>
     );
   }
-
-  const relatedProducts = allProducts
-    .filter((item) => item.type === product.type && item.slug !== product.slug)
-    .slice(0, 4);
 
   return (
     <section className="bg-[#fffaf8] py-12">
@@ -141,7 +190,9 @@ const ProductDetails = () => {
             </div>
 
             <div className="flex gap-4 mt-10">
-              <button className="flex-1 bg-[#e85877] hover:bg-pink-700 text-white py-4 rounded-xl flex items-center justify-center gap-3">
+              <button
+                className="flex-1 bg-[#e85877] hover:bg-pink-700 text-white py-4 rounded-xl flex items-center justify-center gap-3"
+                onClick={handleAddToCart}>
                 <ShoppingCart />
                 Add to Cart
               </button>
@@ -195,7 +246,7 @@ const ProductDetails = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {relatedProducts.map((item) => (
-              <ProductCard key={item.id} product={item} type={item.type} />
+              <ProductCard key={item._id} product={item} type={item.type} />
             ))}
           </div>
         </div>

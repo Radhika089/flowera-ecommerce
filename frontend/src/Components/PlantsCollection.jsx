@@ -1,14 +1,38 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
+
 import ProductCard from "./ProductCard";
-import gifts from "../data/gifts";
-import plants from "../data/plants";
+import { getProducts } from "../api/product.api";
 
 const PlantsCollection = () => {
+  const [plants, setPlants] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchPlants() {
+      try {
+        const { data } = await getProducts({
+          type: "plants",
+          limit: 6,
+        });
+
+        setPlants(data.products);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchPlants();
+  }, []);
+
+  if (loading) return null;
+
   return (
     <section className="py-16 px-6 bg-[#fffaf8]">
       <div className="max-w-7xl mx-auto">
@@ -17,7 +41,7 @@ const PlantsCollection = () => {
         </h2>
 
         <p className="text-center text-gray-500 mt-3 mb-10">
-          Our most loved flowers and gifts
+          Fresh indoor and outdoor plants for every space
         </p>
 
         <Swiper
@@ -39,9 +63,9 @@ const PlantsCollection = () => {
               slidesPerView: 5,
             },
           }}>
-          {plants.slice(0, 6).map((product) => (
-            <SwiperSlide key={product.id}>
-              <ProductCard product={product} type="plants" />
+          {plants.map((plant) => (
+            <SwiperSlide key={plant._id}>
+              <ProductCard product={plant} type={plant.type} />
             </SwiperSlide>
           ))}
         </Swiper>

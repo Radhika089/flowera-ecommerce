@@ -1,13 +1,37 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/navigation";
+
 import ProductCard from "./ProductCard";
-import gifts from "../data/gifts";
+import { getProducts } from "../api/product.api";
 
 const GiftsCollection = () => {
+  const [gifts, setGifts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchGifts() {
+      try {
+        const { data } = await getProducts({
+          type: "gifts",
+        });
+
+        setGifts(data.products);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchGifts();
+  }, []);
+
+  if (loading) return null;
+
   return (
     <section className="py-16 px-6 bg-[#fffaf8]">
       <div className="max-w-7xl mx-auto">
@@ -38,9 +62,9 @@ const GiftsCollection = () => {
               slidesPerView: 5,
             },
           }}>
-          {gifts.slice(0, 6).map((product) => (
-            <SwiperSlide key={product.id}>
-              <ProductCard product={product} type="gifts" />
+          {gifts.map((gift) => (
+            <SwiperSlide key={gift._id}>
+              <ProductCard product={gift} type={gift.type} />
             </SwiperSlide>
           ))}
         </Swiper>

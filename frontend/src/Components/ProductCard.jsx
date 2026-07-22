@@ -8,7 +8,7 @@ const ProductCard = ({ product, type }) => {
       <Link to={`/${type}/${product.slug}`}>
         <div className="h-64 overflow-hidden">
           <img
-            src={product.image}
+            src={product.images?.[0]}
             alt={product.name}
             className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
           />

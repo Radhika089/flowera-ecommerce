@@ -10,10 +10,16 @@ import Testimonials from "../Components/Testimonials";
 import FinalBanner from "../Components/FinalBanner";
 import GiftsCollection from "../Components/GiftsCollection";
 import PlantsCollection from "../Components/PlantsCollection";
+import SEO from "../Components/SEO";
 
 const Home = () => {
   return (
     <>
+      <SEO
+        title="BloomBasket | Fresh Flowers, Cakes & Gifts"
+        description="Order fresh flowers, delicious cakes and thoughtful gifts with same day delivery."
+      />
+
       <Hero />
       <CategorySection />
       <PromoSection />

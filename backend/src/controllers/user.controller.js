@@ -36,7 +36,11 @@ export async function registerUser(req, res) {
     return res.status(201).json({
       success: true,
       message: "User registered successfully!",
-      user,
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      },
       token,
     });
   } catch (error) {
@@ -75,6 +79,11 @@ export async function loginUser(req, res) {
     return res.status(201).json({
       success: true,
       message: "User login successfully!",
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      },
       token,
     });
   } catch (error) {

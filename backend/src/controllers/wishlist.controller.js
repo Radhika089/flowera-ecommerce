@@ -7,9 +7,11 @@ export async function getWishlist(req, res) {
       .populate("products");
 
     if (!wishlist) {
-      return res.status(400).json({
-        success: false,
-        message: "Wishlist not found",
+      return res.status(200).json({
+        success: true,
+        wishlist: {
+          products: [],
+        },
       });
     }
 
@@ -54,6 +56,8 @@ export async function addToWishlist(req, res) {
 
     await wishlist.save();
 
+    await wishlist.populate("products");
+
     return res.status(200).json({
       success: true,
       message: "Product added to wishlist",
@@ -88,6 +92,8 @@ export async function removeFromWishlist(req, res) {
     );
 
     await wishlist.save();
+
+    await wishlist.populate("products");
 
     return res.status(200).json({
       success: true,

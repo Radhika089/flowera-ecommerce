@@ -12,8 +12,9 @@ import ProductCard from "../Components/ProductCard";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../api/cart.api";
 import { getProduct, getProducts } from "../api/product.api";
-import { isLoggedIn } from "../utlis/auth";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
@@ -24,12 +25,13 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
 
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
+  const { user } = useAuth();
+
   async function handleAddToCart() {
-    if (!isLoggedIn()) {
-      alert("Please login first to add products to cart");
+    if (!user) {
+      toast.error("Please login first");
       navigate("/auth");
       return;
     }
@@ -42,7 +44,7 @@ const ProductDetails = () => {
 
       console.log(data);
 
-      alert("Product added to cart 🛒");
+      toast.success("Product added to cart 🛒");
     } catch (error) {
       console.log(error);
     }

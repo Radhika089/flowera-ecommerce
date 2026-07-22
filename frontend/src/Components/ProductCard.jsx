@@ -1,10 +1,83 @@
 import React from "react";
-import { ShoppingCart, Star } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ShoppingCart, Star, Heart } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+
+import { addToCart } from "../api/cart.api";
+import { addToWishlist, removeFromWishlist } from "../api/wishlist.api";
+import { useAuth } from "../hooks/useAuth";
+
+import { toast } from "react-toastify";
 
 const ProductCard = ({ product, type }) => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const { cartCount, setCartCount } = useAuth();
+  const { wishlistCount, setWishlistCount } = useAuth();
+
+  async function handleCart(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!user) {
+      toast.error("Please login first");
+      navigate("/auth");
+      return;
+    }
+
+    try {
+      await addToCart({
+        productId: product._id,
+        quantity: 1,
+      });
+
+      setCartCount(cartCount + 1);
+
+      toast.success("Product added to cart 🛒");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data?.message || "Something went wrong");
+    }
+  }
+
+  async function handleWishlist(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!user) {
+      toast.error("Please login first");
+      navigate("/auth");
+      return;
+    }
+
+    try {
+      await addToWishlist(product._id);
+
+      setWishlistCount(wishlistCount + 1);
+
+      toast.success("Added to Wishlist ❤️");
+    } catch (error) {
+      if (error.response?.data?.message === "Product already in wishlist") {
+        await removeFromWishlist(product._id);
+
+        setWishlistCount(Math.max(0, wishlistCount - 1));
+
+        toast.success("Removed from Wishlist");
+      } else {
+        console.log(error);
+      }
+    }
+  }
+
   return (
-    <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group">
+    <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group relative">
+      {/* Wishlist */}
+      <button
+        onClick={handleWishlist}
+        className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md z-10 hover:bg-pink-50">
+        <Heart size={18} className="text-pink-500" fill="currentColor" />
+      </button>
+
       <Link to={`/${type}/${product.slug}`}>
         <div className="h-64 overflow-hidden">
           <img
@@ -41,11 +114,13 @@ const ProductCard = ({ product, type }) => {
 
         <div className="mt-3">
           <span className="text-xl font-bold text-[#e85877]">
-            {product.price}
+            ₹{product.price}
           </span>
         </div>
 
-        <button className="mt-4 w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-[#e85877] text-[#e85877] font-medium hover:bg-[#e85877] hover:text-white transition-all duration-300">
+        <button
+          onClick={handleCart}
+          className="mt-4 w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-[#e85877] text-[#e85877] font-medium hover:bg-[#e85877] hover:text-white transition-all duration-300">
           <ShoppingCart size={18} />
           Add to Cart
         </button>

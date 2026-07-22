@@ -1,39 +1,71 @@
-import React, { useState } from "react";
 import { Search } from "lucide-react";
 import ProductCard from "./ProductCard";
+import React, { useEffect, useMemo, useState } from "react";
+import { getProducts } from "../api/product.api";
 
 const ProductListing = ({
   title,
   subtitle,
   heroImage,
   buttonText,
-  products,
+  type,
   categories,
 }) => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [sortBy, setSortBy] = useState("newest");
 
-  const filteredProducts = products
-    .filter((product) => {
-      const matchesSearch = product.name
-        .toLowerCase()
-        .includes(search.toLowerCase());
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-      const matchesCategory =
-        category === "All" || product.category === category;
+  useEffect(() => {
+    fetchProducts();
+  }, [type, category]);
 
-      return matchesSearch && matchesCategory;
-    })
-    .sort((a, b) => {
-      if (sortBy === "low") return a.price - b.price;
+  async function fetchProducts() {
+    try {
+      setLoading(true);
 
-      if (sortBy === "high") return b.price - a.price;
+      const { data } = await getProducts({
+        type,
+        category: category === "All" ? "" : category,
+      });
 
-      if (sortBy === "rating") return b.rating - a.rating;
+      setProducts(data.products);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
-      return b.id - a.id;
-    });
+  const filteredProducts = useMemo(() => {
+    return products
+      .filter((product) => {
+        const matchesSearch = product.name
+          .toLowerCase()
+          .includes(search.toLowerCase());
+
+        const matchesCategory =
+          category === "All" || product.category === category;
+
+        return matchesSearch && matchesCategory;
+      })
+      .sort((a, b) => {
+        if (sortBy === "low") return a.price - b.price;
+        if (sortBy === "high") return b.price - a.price;
+        if (sortBy === "rating") return b.rating - a.rating;
+        return 0;
+      });
+  }, [products, search, category, sortBy]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <section className="bg-[#fffaf8] min-h-screen py-10">
@@ -142,7 +174,7 @@ const ProductListing = ({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} type={type} />
           ))}
         </div>
 

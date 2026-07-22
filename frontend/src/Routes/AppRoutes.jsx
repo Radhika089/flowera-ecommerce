@@ -15,6 +15,8 @@ import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import Wishlist from "../Pages/Wishlist";
 import Auth from "../Pages/Auth";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AppRoutes = () => {
   return (
@@ -40,6 +42,16 @@ const AppRoutes = () => {
         <Route path="/auth" element={<Auth />} />
       </Routes>
       <Footer />
+
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 };

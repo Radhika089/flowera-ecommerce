@@ -1,23 +1,29 @@
 import ProductListing from "../Components/ProductListing";
-import cakes from "../data/cakes";
+import SEO from "../Components/SEO";
 
 const Cakes = () => {
   return (
-    <ProductListing
-      title="Delicious Cakes"
-      subtitle="Freshly baked cakes for birthdays and celebrations."
-      buttonText="Shop Cakes"
-      heroImage="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1200"
-      products={cakes}
-      categories={[
-        "All",
-        "Chocolate",
-        "Vanilla",
-        "Red Velvet",
-        "Fruit",
-        "Premium",
-      ]}
-    />
+    <>
+      <SEO
+        title="Cakes | BloomBasket"
+        description="Delicious birthday cakes, anniversary cakes and celebration cakes delivered fresh."
+      />
+      <ProductListing
+        title="Delicious Cakes"
+        subtitle="Freshly baked cakes for birthdays and celebrations."
+        buttonText="Shop Cakes"
+        heroImage="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1200"
+        type="cakes"
+        categories={[
+          "All",
+          "Chocolate",
+          "Vanilla",
+          "Red Velvet",
+          "Fruit",
+          "Premium",
+        ]}
+      />
+    </>
   );
 };
 

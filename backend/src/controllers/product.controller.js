@@ -1,6 +1,7 @@
 import productModel from "../models/product.model.js";
 
 export async function createProduct(req, res) {
+  console.log("PRODUCT DATA:", req.body);
   const {
     name,
     slug,
@@ -71,7 +72,7 @@ export async function createProduct(req, res) {
 }
 
 export async function getAllProducts(req, res) {
-  const { sort, category, type, search, page = 1, limit = 10 } = req.query;
+  const { sort, category, type, search, page = 1, limit = 100 } = req.query;
 
   try {
     let query = {};

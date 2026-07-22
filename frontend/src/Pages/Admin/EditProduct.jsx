@@ -7,27 +7,34 @@ import { toast } from "react-toastify";
 
 const EditProduct = () => {
   const { id } = useParams();
-
   const navigate = useNavigate();
 
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    async function fetch() {
-      const { data } = await getProductById(id);
+    async function fetchProduct() {
+      try {
+        const { data } = await getProductById(id);
 
-      setProduct(data.product);
+        setProduct(data.product);
+      } catch (error) {
+        toast.error("Failed to load product");
+      }
     }
 
-    fetch();
+    fetchProduct();
   }, [id]);
 
-  async function handleUpdate(data) {
-    await updateProduct(id, data);
+  async function handleUpdate(productData) {
+    try {
+      await updateProduct(id, productData);
 
-    toast.success("Product updated");
+      toast.success("Product updated successfully");
 
-    navigate("/admin/products");
+      navigate("/admin/products");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Update failed");
+    }
   }
 
   if (!product) return <p>Loading...</p>;

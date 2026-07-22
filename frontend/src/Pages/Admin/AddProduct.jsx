@@ -7,14 +7,18 @@ import { useNavigate } from "react-router-dom";
 const AddProduct = () => {
   const navigate = useNavigate();
 
-  async function handleCreate(data) {
+  async function handleCreate(productData) {
+    console.log("FORM DATA FROM FRONTEND:", productData);
+
     try {
-      await createProduct(data);
+      await createProduct(productData);
 
       toast.success("Product added successfully");
 
       navigate("/admin/products");
     } catch (error) {
+      console.log(error.response?.data);
+
       toast.error(error.response?.data?.message || "Failed to add product");
     }
   }

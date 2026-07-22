@@ -13,6 +13,8 @@ export const getProductById = (id) => {
 };
 
 export const createProduct = (data) => {
+  console.log("API CREATE DATA:", data);
+
   return api.post("/product/create", data);
 };
 

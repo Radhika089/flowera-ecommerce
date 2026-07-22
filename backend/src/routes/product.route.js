@@ -26,7 +26,16 @@ productRouter.get("/:type/:slug", getProductBySlug);
 
 // admin route
 
-productRouter.post("/create", authMiddleware, adminMiddleware, createProduct);
+productRouter.post(
+  "/create",
+  (req, res, next) => {
+    console.log("CREATE ROUTE HIT");
+    next();
+  },
+  authMiddleware,
+  adminMiddleware,
+  createProduct,
+);
 productRouter.put("/:id", authMiddleware, adminMiddleware, updateProduct);
 
 productRouter.delete("/:id", authMiddleware, adminMiddleware, deleteProduct);

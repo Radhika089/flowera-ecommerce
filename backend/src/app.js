@@ -5,6 +5,7 @@ import userRouter from "./routes/user.route.js";
 import wishlistRouter from "./routes/wishlist.route.js";
 import cors from "cors";
 import cartRouter from "./routes/cart.routes.js";
+import uploadRouter from "./routes/upload.route.js";
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.use("/api/product", productRouter);
 app.use("/api/user", userRouter);
 app.use("/api/wishlist", wishlistRouter);
 app.use("/api/cart", cartRouter);
+app.use("/api/upload", uploadRouter);
 
 export default app;

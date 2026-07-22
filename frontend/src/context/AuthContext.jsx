@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getCurrentUser } from "../api/user.api";
+import { getCurrentUser, logout } from "../api/user.api";
 import { getCart } from "../api/cart.api";
 import { getWishlist } from "../api/wishlist.api";
 
@@ -41,6 +41,18 @@ export default function AuthProvider({ children }) {
     }
   }
 
+  async function logoutUser() {
+    try {
+      await logout();
+
+      setUser(null);
+      setCartCount(0);
+      setWishlistCount(0);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     fetchUser();
   }, []);
@@ -50,6 +62,7 @@ export default function AuthProvider({ children }) {
       value={{
         user,
         loading,
+        logoutUser,
         fetchUser,
 
         cartCount,

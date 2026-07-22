@@ -3,18 +3,32 @@ import {
   Search,
   Heart,
   ShoppingCart,
-  UserRound,
   UserRoundKey,
   Menu,
   X,
+  LogOut,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
+  const [profileMenu, setProfileMenu] = useState(false);
 
-  const { user, cartCount, wishlistCount } = useAuth();
+  const { user, cartCount, wishlistCount, logoutUser } = useAuth();
+
+  async function handleLogout() {
+    try {
+      await logoutUser();
+
+      setProfileMenu(false);
+
+      toast.success("Logged out successfully 👋");
+    } catch (error) {
+      toast.error("Logout failed");
+    }
+  }
 
   return (
     <nav className="w-full bg-[#fefbfb] shadow-sm sticky top-0 z-50">
@@ -70,34 +84,54 @@ const Navbar = () => {
         <div className="flex items-center gap-5">
           {/* Wishlist */}
           <Link to="/wishlist" className="relative">
-            <Heart className="cursor-pointer hover:text-pink-600 transition" />
+            <Heart className="hover:text-pink-600" />
 
             {wishlistCount > 0 && (
-              <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-pink-600 text-white text-xs flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 bg-pink-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 {wishlistCount}
               </span>
             )}
           </Link>
 
-          {/* Cart */}
           <Link to="/cart" className="relative">
-            <ShoppingCart className="cursor-pointer hover:text-pink-600 transition" />
+            <ShoppingCart className="hover:text-pink-600" />
 
             {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-pink-600 text-white text-xs flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 bg-pink-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 {cartCount}
               </span>
             )}
           </Link>
 
-          {/* User */}
-          <Link to={user ? "/" : "/auth"}>
+          <div className="relative">
             {user ? (
-              <UserRound className="cursor-pointer hover:text-pink-600 transition" />
+              <>
+                <button onClick={() => setProfileMenu(!profileMenu)}>
+                  <UserRoundKey className="cursor-pointer hover:text-pink-600 transition" />
+                </button>
+
+                {profileMenu && (
+                  <div className="absolute right-0 mt-3 w-52 bg-white rounded-2xl shadow-xl border z-50 overflow-hidden">
+                    <div className="px-4 py-3 border-b">
+                      <p className="font-semibold">{user.name}</p>
+                      <p className="text-sm text-gray-500">{user.email}</p>
+                    </div>
+
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-3 px-4 py-3 hover:bg-pink-50 transition text-red-500">
+                      <LogOut size={18} />
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </>
             ) : (
-              <UserRoundKey className="cursor-pointer hover:text-pink-600 transition" />
+              <Link to="/auth">
+                <UserRoundKey className="cursor-pointer hover:text-pink-600 transition" />
+              </Link>
             )}
-          </Link>
+          </div>
 
           {menu ? (
             <X
